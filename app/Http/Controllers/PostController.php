@@ -15,4 +15,15 @@ class PostController extends Controller
     {
         return view("show")->with(["post" => $post]);
     }
+    public function create()
+    {
+        return view("create");
+    }
+    public function store(Request $request,Post $post)
+    {
+       $input = $request["post"];
+       $post->fill($input)->save();//クライアント側からのデータを空のpost インスタンスに保存する。
+       return redirect('/posts/' . $post->id);//URLの変更
+    }
+    
 }
