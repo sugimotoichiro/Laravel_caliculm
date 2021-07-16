@@ -21,9 +21,18 @@ class PostController extends Controller
     }
     public function store(Post $post, PostRequest $request)
     {
-       $input = $request["post"];
-       $post->fill($input)->save();//クライアント側からのデータを空のpost インスタンスに保存する。
-       return redirect('/posts/' . $post->id);//URLの変更
+        $input = $request["post"];
+        $post->fill($input)->save();//クライアント側からのデータを空のpost インスタンスに保存する。
+        return redirect('/posts/' . $post->id);//URLの変更
     }
-    
+    public function edit(Post $post)
+    {
+        return view("edit")->with([ "post"=> $post] );
+    }
+    public function update(Post $post, PostRequest $request)
+    {
+        $input = $request["post"];
+        $post->fill($input)->save();
+        return redirect("/posts/". $post->id);
+    }
 }
